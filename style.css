@@ -1,0 +1,1167 @@
+/* ==========================================================================
+   1. RESET & BASE STYLES
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #E2E8F0;
+    background-color: #2A2C2E; /* Premium Space Gray Background */
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.container-full {
+    width: 100%;
+}
+
+/* ==========================================================================
+   2. NAVIGATION HEADER (NAVBAR)
+   ========================================================================== */
+.navbar {
+    background-color: #2A2C2E; /* Matches Space Gray Base */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 25px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand Logo Stack Styles */
+.brand-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.brand-logo {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #FFFFFF;
+    text-decoration: none;
+    line-height: 1.2;
+}
+
+.brand-subline {
+    font-size: 0.6rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #FF9E7D; /* Bright Peach Tagline */
+    opacity: 1;
+    white-space: nowrap;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: #A0AEC0;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #FFFFFF;
+}
+
+.nav-cta {
+    background-color: #FF9E7D; /* Bright Peach Button */
+    color: #2A2C2E !important; /* Contrasting space gray text */
+    padding: 12px 24px;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    transition: background-color 0.3s ease !important;
+}
+
+.nav-cta:hover {
+    background-color: #FFAF94; /* Soft peach hover state */
+}
+
+/* ==========================================================================
+   3. MAIN HERO SECTION (WITH CLIPPING FIXES)
+   ========================================================================== */
+.hero {
+    padding: 100px 0;
+    background-color: #2A2C2E; 
+    overflow: visible !important; /* Forces browser to render the floating shadow */
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 60px;
+    align-items: center;
+    overflow: visible !important; /* Ensures row elements do not truncate children */
+}
+
+.tagline {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #FF9E7D; /* Bright Peach Header Tagline */
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.hero-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.8rem;
+    font-weight: 600;
+    line-height: 1.1;
+    color: #FFFFFF;
+    margin-bottom: 25px;
+}
+
+.hero-text h1 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: #FF9E7D; /* Bright Peach Emphasis Word */
+}
+
+.hero-subtext {
+    font-size: 1.1rem;
+    color: #A0AEC0;
+    max-width: 500px;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.hero-image {
+    position: relative;
+    overflow: visible !important; /* Critical: Lets shadow break out of box */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    filter: brightness(0.9) contrast(1.02);
+}
+/* ==========================================================================
+   4. GLOBAL FLOATING & MOSS GREEN BACKLIT SHADOW UTILITY
+   ========================================================================== */
+.peachee-shadow {
+    display: block;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    
+    /* Optimized Moss Green Glow: Clear backlit tone visible against Space Gray */
+    box-shadow: -20px 25px 60px rgba(74, 99, 82, 0.45) !important;
+    
+    /* Cinematic easing curve for smooth floating physics */
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Float Up Lift Actions on Hover */
+.peachee-shadow:hover {
+    /* Shifts the image 16px up and 8px right */
+    transform: translateY(-16px) translateX(8px) scale(1.015) !important;
+    
+    /* Shadow spreads wider and intensifies to create realistic depth */
+    box-shadow: -45px 50px 90px rgba(74, 99, 82, 0.6) !important;
+}
+
+/* ==========================================================================
+   5. LIGHT FLASH EFFECT
+   ========================================================================== */
+.flash-wrapper {
+    position: relative;
+    overflow: hidden; /* Clips the light flash exactly inside the image bounds */
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.flash-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%; /* Starts off-screen left */
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.03) 30%,
+        rgba(255, 255, 255, 0.4) 50%, /* Core bright flash */
+        rgba(255, 255, 255, 0.03) 70%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-25deg); 
+    pointer-events: none;
+}
+
+.flash-wrapper:hover::after {
+    left: 150%; /* Sweeps flash rapidly right on hover */
+    transition: left 0.75s ease-in-out;
+}
+
+/* ==========================================================================
+   6. SLEEK TRUST & VALUES BAR
+   ========================================================================== */
+.values-bar {
+    background-color: #202123; /* Darker Space Gray variant for structured layering */
+    padding: 60px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.value-item h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+}
+
+.value-item p {
+    color: #A0AEC0;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   7. IMAGERY COLLECTION CAROUSEL
+   ========================================================================== */
+.collection-carousel {
+    padding: 100px 0;
+    background-color: #2A2C2E;
+    overflow: visible !important; /* Allows card shadows to float freely */
+}
+
+.carousel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+}
+
+.section-tagline {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #FF9E7D; /* Bright Peach Carousel Subheader */
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.carousel-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.carousel-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-size: 1.2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    border-color: #FF9E7D;
+    color: #FF9E7D;
+    background-color: rgba(255, 158, 125, 0.05);
+}
+
+.carousel-track {
+    display: flex;
+    gap: 45px; /* Widened to fit expanding shadows on hover */
+    overflow-x: auto;
+    padding: 30px 40px; /* Top padding keeps rising images from getting cropped */
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.collection-card {
+    flex: 0 0 320px;
+    background-color: #202123; /* Darker Space Gray card block background */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    overflow: visible !important;
+}
+
+.collection-card img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+}
+
+.card-meta {
+    padding: 20px;
+    background-color: #202123;
+}
+
+.card-meta span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #FF9E7D; /* Bright Peach Card Tracker Accent */
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.card-meta p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   8. SITE FOOTER
+   ========================================================================== */
+.site-footer {
+    background-color: #2A2C2E;
+    padding: 40px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: auto;
+}
+
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-left p {
+    font-size: 0.825rem;
+    color: #A0AEC0;
+    letter-spacing: 0.5px;
+}
+
+.footer-left .trademark {
+    font-size: 0.55rem;
+    vertical-align: super;
+    position: relative;
+    top: -2px;
+    margin-left: 2px;
+    font-weight: 700;
+    color: #FF9E7D; /* Bright Peach Trademark Marker */
+}
+
+.footer-links {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.footer-links a {
+    font-size: 0.825rem;
+    color: #A0AEC0;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FF9E7D; /* Glows peach when hovering over footer links */
+}
+
+/* ==========================================================================
+   9. RESPONSIVE DESIGN VIEWPORTS
+   ========================================================================== */
+@media (max-width: 968px) {
+    .nav-links { display: none; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-text h1 { font-size: 3.5rem; }
+    .values-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-image img { height: 400px; }
+}
+
+@media (max-width: 640px) {
+    .footer-flex { flex-direction: column; text-align: center; gap: 25px; }
+    .footer-links { justify-content: center; }
+}
+
+@media (min-width: 1200px) {
+    .carousel-track {
+        padding-left: calc((100vw - 1200px) / 2 + 40px);
+        padding-right: calc((100vw - 1200px) / 2 + 40px);
+    }
+}
+/* ==========================================================================
+   10. CORRECTED COMPACT MANIFESTO NEWSLETTER
+   ========================================================================== */
+.newsletter-section {
+    padding-top: 40px;
+    padding-bottom: 20px;
+    background-color: #2A2C2E; /* Matches the Space Gray palette background */
+}
+
+.newsletter-card {
+    background-color: #3A3D40; /* Smooth, matte light graphite box */
+    padding: 30px 40px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.newsletter-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #E2E8F0; /* Soft off-white text */
+    margin-bottom: 6px;
+}
+
+.newsletter-tagline {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: #A0AEC0;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+}
+
+.newsletter-subtext { 
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.825rem; 
+    color: #A0AEC0; 
+    max-width: 520px; 
+}
+
+/* Forces the input field and button to stretch across their assigned row correctly */
+.newsletter-form { 
+    display: flex; 
+    gap: 15px; 
+    width: 100%;
+}
+
+.newsletter-input {
+    flex: 1;
+    background-color: #2A2C2E; /* Inverted matte dark gray background box */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 18px;
+    color: #E2E8F0; /* Soft off-white typed text */
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.825rem;
+    border-radius: 0; /* Keeps a sharp, minimalist edge layout */
+}
+
+.newsletter-input:focus { 
+    outline: none; 
+    border-color: #FF9E7D; /* Soft peach glow frame on click/focus state */
+}
+
+.newsletter-submit {
+    background-color: #E2E8F0; /* Clean silver-white button */
+    color: #2A2C2E; /* High-contrast space gray font text color */
+    border: none;
+    padding: 14px 28px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.825rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap; /* CRITICAL: Stops the word "Subscribe" from breaking or wrapping */
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-submit:hover { 
+    background-color: #FFFFFF; /* Brightens cleanly when hovered over */
+}
+
+
+/* Mobile Responsiveness Viewports */
+@media (max-width: 968px) {
+    .newsletter-card {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        gap: 20px;
+    }
+    .newsletter-content h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .newsletter-submit {
+        width: 100%;
+    }
+}
+/* ==========================================================================
+   11. E-COMMERCE PRODUCT DISPLAY GRID
+   ========================================================================== */
+.product-grid-section {
+    padding: 100px 0;
+    background-color: #2A2C2E;
+    overflow: visible !important; /* Vital: Lets the product item floating shadows breathe */
+}
+
+.grid-header {
+    margin-bottom: 50px;
+    text-align: left;
+}
+
+.grid-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+/* 4-Column Layout Matrix Grid */
+.products-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 30px; /* 40px vertical rows space, 30px side-to-side columns space */
+    overflow: visible !important;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+    overflow: visible !important;
+}
+
+.product-card img {
+    width: 100%;
+    height: 440px; /* Clean vertical uniform presentation scale */
+    object-fit: cover;
+}
+
+/* Metadata Content Fields Below Images */
+.product-info {
+    padding-top: 25px; /* Creates breathing room between image baseline and text */
+}
+
+.product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FF9E7D; /* Bright Peach Pricing Accent Highlights */
+    margin-bottom: 12px;
+}
+
+/* Minimalist Circular Swatch Clusters */
+.color-swatches {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.swatch:hover {
+    transform: scale(1.15);
+}
+
+.swatch-active {
+    border: 1.5px solid #FF9E7D !important; /* Rings the active product option selection in Peach */
+    transform: scale(1.1);
+}
+
+/* Product Matrix Responsive Breakpoints */
+@media (max-width: 1024px) {
+    .products-matrix {
+        grid-template-columns: repeat(2, 1fr); /* Collapses down to 2 items per row on tablets */
+        gap: 30px;
+    }
+}
+
+@media (max-width: 568px) {
+    .products-matrix {
+        grid-template-columns: 1fr; /* Stacks completely flat single-column on tiny mobile frames */
+        gap: 40px;
+    }
+    .product-card img {
+        height: 380px; /* Slightly compresses vertical bounding boxes for smaller phone layouts */
+    }
+}
+/* ==========================================================================
+   NEW COMPONENT STYLES: E-COMMERCE PRODUCT DISPLAY GRID & REDIRECTS
+   ========================================================================== */
+.product-grid-section {
+    padding: 100px 0;
+    background-color: #2A2C2E;
+    overflow: visible !important; /* Vital: Keeps the item floating shadows from clipping */
+}
+
+.grid-header {
+    margin-bottom: 50px;
+}
+
+.grid-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.products-matrix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px 30px;
+    overflow: visible !important;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    overflow: visible !important;
+}
+
+.product-info {
+    padding-top: 25px;
+}
+
+.product-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 5px;
+}
+
+.product-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #FF9E7D; /* Bright Peach Pricing */
+}
+
+.color-swatches {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.swatch {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.swatch:hover { transform: scale(1.15); }
+.swatch-active { border: 1.5px solid #FF9E7D !important; transform: scale(1.1); }
+
+/* LINK FORMATTING CORRECTIONS & OVERLAYS */
+a.flash-wrapper {
+    text-decoration: none;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-add-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(42, 44, 46, 0.95);
+    color: #FF9E7D;
+    border: none;
+    padding: 18px 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 5;
+    opacity: 0;
+    transform: translateY(100%);
+    text-decoration: none !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flash-wrapper:hover .quick-add-overlay {
+    opacity: 1;
+    transform: translateY(0); /* Slides up perfectly flush over the bottom of the photo on hover */
+}
+
+.quick-add-overlay:hover {
+    background-color: #FF9E7D;
+    color: #2A2C2E;
+}
+/* LINK REDIRECT TYPOGRAPHY CORRECTIONS */
+a.flash-wrapper, 
+.product-card a {
+    text-decoration: none !important; /* Removes default link underlines */
+    color: inherit !important;        /* Prevents the default browser link blue */
+}
+
+/* Forces the product hover overlay to stay off-white or a clean light peach */
+.quick-add-overlay {
+    color: #E2E8F0 !important; /* Soft Elegant Off-White */
+}
+
+/* When you hover directly over the overlay text box button itself */
+.quick-add-overlay:hover {
+    background-color: #FF9E7D !important; /* Bright Peach background */
+    color: #2A2C2E !important;            /* Inverts text to dark space gray for contrast */
+}
+/* LOOKBOOK TRACK LINK RESET */
+.collection-card a.flash-wrapper {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+}
+/* ==========================================================================
+   13. CUSTOM CONTACT US POPUP MODAL STYLES
+   ========================================================================== */
+.contact-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(32, 33, 35, 0.7); /* Frosted dark backdrop overlay screen */
+    backdrop-filter: blur(8px); /* Smooth background blur filter */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Floats safely on top of everything else */
+    
+    /* Starts completely hidden and invisible */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active State managed via Javascript toggle class */
+.contact-modal-overlay.modal-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.contact-modal-card {
+    background-color: #202123; /* Dark Space Gray block box */
+    width: 100%;
+    max-width: 540px;
+    padding: 50px 40px;
+    border-left: 2px solid #FF9E7D; /* Features signature accent line on left border */
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    
+    /* Subtle slide-up animation effect when active modal loads */
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-modal-overlay.modal-active .contact-modal-card {
+    transform: translateY(0);
+}
+
+/* Minimalist Close 'X' Button Style */
+.contact-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    color: #A0AEC0;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.contact-modal-close:hover {
+    color: #FF9E7D; /* Glows peach on cursor touch */
+}
+
+.modal-tagline {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #FF9E7D; /* Bright Peach */
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.contact-modal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.modal-subtext {
+    font-size: 0.85rem;
+    color: #A0AEC0;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* Form Layout Configurations */
+.contact-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #E2E8F0;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: #2A2C2E; /* Inverted clean background input field */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 14px 16px;
+    color: #E2E8F0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #FF9E7D; /* Glows peach on active focus typing */
+}
+
+/* Submit Action Button Block */
+.contact-modal-submit {
+    background-color: #FF9E7D; /* Vibrant Bright Peach Call-to-action */
+    color: #2A2C2E;
+    border: none;
+    padding: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.contact-modal-submit:hover {
+    background-color: #FFAF94;
+}
+
+/* Small Device Breakpoint Adjustments */
+@media (max-width: 600px) {
+    .contact-modal-card {
+        padding: 40px 24px;
+        margin: 0 20px;
+    }
+    .contact-modal-header h2 {
+        font-size: 1.8rem;
+    }
+}
+/* ==========================================================================
+   14. CUSTOM ABOUT US MANIFESTO POPUP MODAL STYLES
+   ========================================================================== */
+.about-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(32, 33, 35, 0.7); /* Frosted dark backdrop overlay screen */
+    backdrop-filter: blur(8px); /* Matches contact modal background blur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+    /* Hidden resting state initialization layout parameters */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Active Open Toggle Trigger state handled via Javascript class attachments */
+.about-modal-overlay.modal-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.about-modal-card {
+    background-color: #202123; /* Dark Space Gray block box text field container */
+    width: 100%;
+    max-width: 840px; /* Wider design parameter to handle the two-column grid layout */
+    padding: 60px;
+    border-left: 2px solid #FF9E7D; /* Signature Bright Peach accent left vertical line */
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    
+    /* Slide-up transition framework physics */
+    transform: translateY(30px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-modal-overlay.modal-active .about-modal-card {
+    transform: translateY(0);
+}
+
+/* Close Button Position Layout Mechanics */
+.about-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: transparent;
+    border: none;
+    color: #A0AEC0;
+    font-size: 1.8rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+
+.about-modal-close:hover {
+    color: #FF9E7D;
+}
+
+/* Two Column Layout Mesh Grid */
+.about-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    align-items: flex-start;
+}
+
+.about-modal-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #FFFFFF;
+    margin-top: 10px;
+}
+
+/* Narrative Typography Profiles */
+.about-modal-story {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.story-lead {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: #E2E8F0; /* Soft off-white */
+    line-height: 1.5;
+}
+
+.story-body {
+    font-size: 0.9rem;
+    color: #A0AEC0; /* Slate silver gray typography fields */
+    line-height: 1.6;
+}
+
+.story-footer {
+    font-size: 0.75rem;
+    color: #718096; /* Matches the legal metadata color specs */
+    margin-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 15px;
+}
+
+/* Underline Peach Link Actions */
+.modal-story-link {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #FF9E7D;
+    text-decoration: none;
+    margin-top: 25px;
+    display: inline-block;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-story-link:hover {
+    color: #FFAF94;
+    transform: translateX(4px);
+}
+
+/* Modal Responsive Displays Framework logic for smaller screens */
+@media (max-width: 768px) {
+    .about-modal-grid {
+        grid-template-columns: 1fr; /* Stacks column modules cleanly flat single column on mobile */
+        gap: 30px;
+    }
+    .about-modal-card {
+        padding: 45px 30px;
+        margin: 0 20px;
+    }
+    .about-modal-header h2 {
+        font-size: 1.8rem;
+    }
+}
+/* ==========================================================================
+   15. INTERACTIVE FAQ DROPDOWN ACCORDION MENU STYLES
+   ========================================================================== */
+.faq-section {
+    padding: 100px 0 60px 0; /* Creates wide editorial breathing bounds */
+    background-color: #2A2C2E; /* Matches Matte Space Gray base backdrop */
+    overflow: visible !important;
+}
+
+.faq-accordion-container {
+    max-width: 800px; /* Keeps readable central layout boundaries on screen */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.faq-item {
+    background-color: #202123; /* Darker slate contrast gray card blocks */
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 0;
+}
+
+/* Rest Button Default Layout Configurations */
+.faq-trigger {
+    background: transparent;
+    border: none;
+    color: #FFFFFF;
+    width: 100%;
+    padding: 24px 30px;
+    text-align: left;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.faq-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    color: #FF9E7D; /* Hover turns peach */
+}
+
+/* The Arrow Symbol */
+.faq-arrow {
+    font-size: 1.1rem;
+    color: #A0AEC0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+}
+
+/* Active Open styling transforms */
+.faq-trigger.active {
+    color: #FF9E7D;
+    background-color: rgba(255, 158, 125, 0.02);
+}
+
+.faq-trigger.active .faq-arrow {
+    transform: rotate(90deg); /* Arrow spins downwards upon active accordion click expansion */
+    color: #FF9E7D;
+}
+
+/* Sliding Dropdown Content Panels */
+.faq-panel {
+    max-height: 0; /* Starts completely collapsed out of view */
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: rgba(32, 33, 35, 0.2);
+}
+
+.faq-panel p {
+    padding: 0 30px 24px 30px; /* Inside breathing cushioning text bounds */
+    font-size: 0.9rem;
+    color: #A0AEC0; /* Slate silver gray fonts */
+    line-height: 1.6;
+    text-align: left;
+}
+
+/* FAQ Mobile Device Breakpoint Sizing Constraints */
+@media (max-width: 768px) {
+    .faq-trigger {
+        padding: 20px;
+        font-size: 0.95rem;
+    }
+    .faq-panel p {
+        padding: 0 20px 20px 20px;
+    }
+}

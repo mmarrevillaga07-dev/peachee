@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product 1 - Image Gallery</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      background-color: #111; /* Dark background to make photos pop */
+      color: white;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 { margin-bottom: 20px; font-size: 1.8rem; }
+    
+    /* Main Large Display Image */
+    .main-display {
+      max-width: 600px;
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      background: #222;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Thumbnail Container */
+    .thumbnail-row {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .thumb {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.6;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .thumb:hover, .active {
+      opacity: 1;
+      border-color: #FF9E7D; /* Matches your green order button */
+    }
+    
+    .back-btn {
+      margin-top: 30px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-btn:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <h1>Women Casual Pocket Belted Dress</h1>
+  <!-- Main View -->
+  <img id="mainImage" class="main-display" src="assets/signature-image-1.jpg" alt="Product Main View">
+  <!-- Clickable Thumbnails -->
+  <div class="thumbnail-row">
+    <img class="thumb active" src="assets/signature-image-1.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1a.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1b.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1c.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1d.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1e.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1f.jpg" onclick="switchImage(this)">
+    <img class="thumb" src="assets/signature-image-1g.jpg" onclick="switchImage(this)">
+  </div>
+  <a href="javascript:window.close();" class="back-btn">← Close Gallery Tab</a>
+
+<script>
+  function switchImage(element) {
+    // 1. Change the main display source to match clicked thumbnail
+    document.getElementById('mainImage').src = element.src;
+    
+    // 2. Remove 'active' class from all thumbnails
+    let thumbs = document.getElementsByClassName('thumb');
+    for (let i = 0; i < thumbs.length; i++) {
+      thumbs[i].classList.remove('active');
+    }
+    
+    // 3. Add 'active' class to the clicked thumbnail
+    element.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Place Your Order - PEACHEE</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      background-color: #111; 
+      color: white;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+    
+    .form-container { 
+      max-width: 480px; 
+      width: 100%;
+      background: #222; 
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5); 
+    }
+    
+    h2 { margin-top: 0; color: white; text-align: center; margin-bottom: 25px; }
+    
+    .form-group { margin-bottom: 20px; }
+    
+    label { display: block; margin-bottom: 8px; font-weight: bold; color: #ccc; }
+    
+    /* Clean form input styles */
+    input[type="text"], input[type="email"], input[type="number"], select, textarea { 
+      width: 100%; 
+      padding: 12px; 
+      border: 1px solid #444; 
+      border-radius: 6px; 
+      box-sizing: border-box; 
+      background-color: #333;
+      color: white;
+      font-size: 1rem;
+      font-family: sans-serif;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #FF9E7D; /* Highlights green on focus */
+    }
+
+    /* Row arrangement for adjacent fields */
+    .form-row {
+      display: flex;
+      gap: 15px;
+    }
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    /* Read-only look selector styling */
+    .selected-product-box {
+      background-color: #FF9E7D; 
+      border: 1px solid #FF9E7D;
+      color: #fff;
+      font-weight: bold;
+    }
+    
+    .submit-btn { 
+      width: 100%; 
+      background: #FF9E7D; 
+      color: white; 
+      border: none; 
+      padding: 14px; 
+      font-size: 1.1rem; 
+      font-weight: bold; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+    
+    .submit-btn:hover { background: #FF9E7D; }
+    
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .back-link:hover { color: white; }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>PEACHEE Order Form</h2>
+  
+  <!-- Main Product Order Form linked to your Formspree -->
+<form action="https://formspree.io/f/mgavgjlg" method="POST">
+    
+    <!-- Automated Product Selection -->
+    <div class="form-group">
+      <label>Item Selection</label>
+      <select id="orderProductSelect" name="Product Look" class="selected-product-box">
+        <option value="1">Casual Lace Ruffle Neck Draped Mini</option>
+        <option value="2">Casual Button Blazer</option>
+        <option value="3">Loose and Slim Casual Blouse</option>
+        <option value="4">Party Red Appliques Asymmetrical Top</option>
+        <option value="5">Look 5</option>
+        <option value="6">Look 6</option>
+        <option value="7">Look 7</option>
+        <option value="8">Look 8</option>
+        <option value="9">Look 9</option>
+        <option value="10">Look 10</option>
+      </select>
+    </div>
+
+    <!-- Product Options Row (Size, Color, Pieces) -->
+    <div class="form-row">
+      <div class="form-group">
+        <label>Size</label>
+        <select name="Size" required>
+          <option value="" disabled selected>Size</option>
+          <option value="S">Small</option>
+          <option value="M">Medium</option>
+          <option value="L">Large</option>
+          <optgroup label="Plus Sizes">
+            <option value="XL">Extra Large (XL)</option>
+            <option value="XXL">Double Extra Large (XXL)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Color</label>
+          <input type="text" name="Color" required placeholder="Your preferred color (e.g., Red, Blue, Black)">
+      </div>
+
+      <div class="form-group">
+        <label>Pieces</label>
+        <input type="number" name="Quantity" min="1" max="20" value="1" required>
+      </div>
+    </div>
+
+    <!-- Customer Contact Info -->
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" name="Customer Name" required placeholder="Your full name">
+    </div>
+    
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" name="Customer Email" required placeholder="name@example.com">
+    </div>
+
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <input type="text" name="Delivery Address" required placeholder="Street address, city, region">
+    </div>
+
+    <!-- Additional Information & Requests Box -->
+    <div class="form-group">
+      <label>Special Notes & Delivery Requests</label>
+      <textarea name="Special Notes / Landmark" placeholder="Write nearby landmarks, specific color/material requests, preferred mode of payment, or delivery drop-off instructions here..."></textarea>
+    </div>
+    
+    <button type="submit" class="submit-btn">Confirm Order</button>
+</form>
+
+  
+  <a href="javascript:history.back()" class="back-link">← Return to Gallery</a>
+</div>
+
+<script>
+  // Automatically grab the product ID passed from carousel.html
+  const urlParams = new URLSearchParams(window.location.search);
+  const lookId = urlParams.get('id');
+
+  if (lookId) {
+    const selectDropdown = document.getElementById('orderProductSelect');
+    selectDropdown.value = lookId;
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Gallery Showcase</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      background-color: #111; /* Matches your gallery background color */
+      color: white;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .gallery-container {
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h1 { margin-bottom: 5px; font-size: 1.8rem; }
+    h2 { margin-top: 0; font-size: 1.2rem; color: #aaa; font-weight: normal; margin-bottom: 20px;}
+    
+    /* Main Large Display Image */
+    .main-display {
+      width: 100%;
+      height: 450px;
+      object-fit: contain;
+      background: #222;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    /* Thumbnail Container */
+    .thumbnail-row {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .thumb {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.6;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .thumb:hover, .active {
+      opacity: 1;
+      border-color: #FF9E7D;
+    }
+    
+    /* Order Button Placement inside Gallery */
+    .order-btn {
+      margin-top: 25px;
+      background-color: #FF9E7D;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .order-btn:hover { background-color: #FF9E7D; }
+
+    .back-btn {
+      margin-top: 20px;
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: block;
+    }
+    .back-btn:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+  <div class="gallery-container">
+    <!-- Dynamic Product Headings -->
+    <h1 id="productTitle">Look Gallery</h1>
+    <h2 id="productDesc">Loading details...</h2>
+
+    <!-- Main View -->
+    <img id="mainImage" class="main-display" src="assets/carousel-image-10a.jpg" alt="Product Main View">
+
+    <!-- Clickable Thumbnails -->
+    <div class="thumbnail-row" id="thumbRow">
+      <!-- Generated automatically by JavaScript below -->
+    </div>
+
+    <!-- Direct link to Order form -->
+    <a href="#" id="orderBtnLink" class="order-btn">Create Order Now!</a>
+    
+    <a href="javascript:window.close();" class="back-btn">← Close Gallery Tab</a>
+  </div>
+
+<script>
+  // 1. Data mapping for Looks 1 through 10 (Update filenames to match yours)
+  const productData = {
+    "1": { title: "Casual Lace Ruffle Neck Draped Mini", desc: "Pattern:Plain, Style:Casual, Dress Type:A Line, Plus Size:No, Material:Polyester, Composition:100%Polyester, Fit Type:Regular Fit, Sheer:No, Stretch:Non-stretch",
+    images: ["assets/carousel-image-1a.jpg", "assets/carousel-image-1b.jpg", "assets/carousel-image-1c.jpg", "assets/carousel-image-1d.jpg", "assets/carousel-image-1e.jpg", "assets/carousel-image-1f.jpg", "assets/carousel-image-1g.jpg", "assets/carousel-image-1h.jpg"] },
+
+    "2": { title: "Casual Button Blazer", desc: "Pattern: Plain, Style: Casual, Plus Size: No, Material: Polyester, Composition: 100%Polyester, Fit Type: Regular Fit, Sheer: No, Stretch: Non-stretch",
+     images: ["assets/carousel-image-2a.jpg", "assets/carousel-image-2b.jpg", "assets/carousel-image-2c.jpg", "assets/carousel-image-2d.jpg", "assets/carousel-image-2e.jpg", "assets/carousel-image-2f.jpg", "assets/carousel-image-2g.jpg", "assets/carousel-image-2h.jpg"] },
+
+    "3": { title: "Loose and Slim Casual Blouse", desc: "Crafted from brand new, skin-friendly fabric, this shirt offers a smooth texture. Its simple yet fashionable design ensures it never goes out of style. The fabric feels gentle on your skin, enhancing your overall experience.",
+     images: ["assets/carousel-image-3a.jpg", "assets/carousel-image-3b.jpg", "assets/carousel-image-3c.jpg", "assets/carousel-image-3d.jpg", "assets/carousel-image-3e.jpg", "assets/carousel-image-3f.jpg", "assets/carousel-image-3g.jpg", "assets/carousel-image-3h.jpg"] },
+
+    "4": { title: "Party Red Appliques Asymmetrical Top", desc: "Style:Casual, Plus Size:No, Material:Polyester, Composition:100%Polyester, Fit Type:Slim Fit, Sheer:No, Stretch:Non-stretch",
+     images: ["assets/carousel-image-4a.jpg", "assets/carousel-image-4b.jpg", "assets/carousel-image-4c.jpg", "assets/carousel-image-4d.jpg", "assets/carousel-image-4e.jpg", "assets/carousel-image-4f.jpg", "assets/carousel-image-4g.jpg", "assets/carousel-image-4h.jpg"] },
+
+    "5": { title: "Women Casual Classic & Versatile Black Top", desc: "Pattern:Plain, Style:Casual, Plus Size:No, Material:Polyester, Composition:95% Polyester + 5% Spandex, Fit Type:Slim Fit, Sheer:No, Stretch:Medium-Stretch",
+     images: ["assets/carousel-image-5a.jpg", "assets/carousel-image-5b.jpg", "assets/carousel-image-5c.jpg", "assets/carousel-image-5d.jpg", "assets/carousel-image-5e.jpg", "assets/carousel-image-5f.jpg", "assets/carousel-image-5g.jpg", "assets/carousel-image-5h.jpg"] },
+
+    "6": { title: "Super Comfy Sleepwear Terno", desc: "Crafted from soft, breathable cotton for ultimate comfort. The relaxed fit ensures ease of movement, while the elastic waistband provides a secure yet gentle hold. Perfect for lounging or sleeping, this set combines style and comfort effortlessly.",
+     images: ["assets/carousel-image-6a.jpg", "assets/carousel-image-6b.jpg", "assets/carousel-image-6c.jpg", "assets/carousel-image-6d.jpg", "assets/carousel-image-6e.jpg", "assets/carousel-image-6f.jpg", "assets/carousel-image-6g.jpg", "assets/carousel-image-6h.jpg"] },
+
+    "7": { title: "Halter Shorts Pajamas Set", desc: "DemiBra Summer sexy halter shorts pajamas set for Women Sweet Camisole Shorts 2-piece Set.",
+     images: ["assets/carousel-image-7a.jpg", "assets/carousel-image-7b.jpg", "assets/carousel-image-7c.jpg", "assets/carousel-image-7d.jpg", "assets/carousel-image-7e.jpg", "assets/carousel-image-7f.jpg", "assets/carousel-image-7g.jpg", "assets/carousel-image-7h.jpg"] },
+
+    "8": { title: "Look 8", desc: "Description for Product 8",
+     images: ["assets/carousel-image-8a.jpg", "assets/carousel-image-8b.jpg", "assets/carousel-image-8c.jpg", "assets/carousel-image-8d.jpg", "assets/carousel-image-8e.jpg", "assets/carousel-image-8f.jpg", "assets/carousel-image-8g.jpg", "assets/carousel-image-8h.jpg"] },
+
+    "9": { title: "Look 9", desc: "Description for Product 9",
+     images: ["assets/carousel-image-9a.jpg", "assets/carousel-image-9b.jpg", "assets/carousel-image-9c.jpg", "assets/carousel-image-9d.jpg", "assets/carousel-image-9e.jpg", "assets/carousel-image-9f.jpg", "assets/carousel-image-9g.jpg", "assets/carousel-image-9h.jpg"] },
+
+    "10": { title: "Look 10", desc: "Cashmere Loungewear Set",
+     images: ["assets/carousel-image-10a.jpg", "assets/carousel-image-10b.jpg", "assets/carousel-image-10c.jpg", "assets/carousel-image-10d.jpg", "assets/carousel-image-10e.jpg", "assets/carousel-image-10f.jpg", "assets/carousel-image-10g.jpg", "assets/carousel-image-10h.jpg"] }
+
+  };
+
+  // 2. Read "?id=" from the address URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const lookId = urlParams.get('id') || "10"; // Defaults to Look 10 if no ID specified
+
+  const currentProduct = productData[lookId];
+  // Append the look ID onto the order button link dynamically
+  if (lookId) {
+  document.getElementById('orderBtnLink').href = `order-form.html?id=${lookId}`;
+  }
+
+
+  if (currentProduct) {
+    // Populate text content
+    document.getElementById('productTitle').innerText = currentProduct.title;
+    document.getElementById('productDesc').innerText = currentProduct.desc;
+    
+    // Set initial main image
+    document.getElementById('mainImage').src = currentProduct.images[0];
+    
+    // Generate thumbnails dynamically
+    const thumbRow = document.getElementById('thumbRow');
+    currentProduct.images.forEach((imgSrc, index) => {
+      const img = document.createElement('img');
+      img.src = imgSrc;
+      img.className = 'thumb' + (index === 0 ? ' active' : '');
+      img.onclick = function() { switchImage(this); };
+      thumbRow.appendChild(img);
+    });
+  }
+
+  // Thumbnail click function
+  function switchImage(element) {
+    document.getElementById('mainImage').src = element.src;
+    let thumbs = document.getElementsByClassName('thumb');
+    for (let i = 0; i < thumbs.length; i++) {
+      thumbs[i].classList.remove('active');
+    }
+    element.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
